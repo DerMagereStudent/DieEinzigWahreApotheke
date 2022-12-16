@@ -1,5 +1,8 @@
 using System.Reflection;
 
+using DieEinzigWahreApotheke.Core.Services;
+using DieEinzigWahreApotheke.Infrastructure.Services;
+
 using Microsoft.OpenApi.Models;
 
 namespace DieEinzigWahreApotheke.WebAPI; 
@@ -23,6 +26,7 @@ public static class Program {
 		builder.Configuration.AddEnvironmentVariables();
 
 		Program.ConfigureControllers(builder);
+		Program.ConfigureScopedServices(builder);
 		
 		// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 		builder.Services.AddEndpointsApiExplorer();
@@ -32,9 +36,6 @@ public static class Program {
 					Version = "v1",
 					Description = "An pharmacy web app vulnerable for CSRF attacks."
 				});
-				var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-				var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-				c.IncludeXmlComments(xmlPath);
 			}
 		);
 	}
@@ -58,5 +59,9 @@ public static class Program {
 	
 	private static void ConfigureControllers(WebApplicationBuilder builder) {
 		builder.Services.AddControllers();
+	}
+	
+	private static void ConfigureScopedServices(WebApplicationBuilder builder) {
+		builder.Services.AddScoped<IMedicineService, MedicineService>();
 	}
 }
