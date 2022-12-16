@@ -16,18 +16,23 @@ public class MedicineService : IMedicineService {
 		this._pznValidationRegex = new Regex("^[0-9]{8,8}$", RegexOptions.Compiled);
 	}
 	
-	public async Task<IList<Medicine>> FindBySearchStringAsync(string searchString, int maxResults) {
-		var query = new MedicineSearchQuery {Query = searchString, HitsPerPage = maxResults};
+	public async Task<MedicineSearchResult> FindBySearchStringAsync(string searchString, int page, int itemsPerPage) {
+		var query = new MedicineSearchQuery {Query = searchString, Page = page, HitsPerPage = itemsPerPage};
 		
 		using var httpClient = new HttpClient();
 		var response = await httpClient.PostAsync(MedicineService.AlgoliaUrl, new StringContent(JsonConvert.SerializeObject(query)));
 		var responseString = await response.Content.ReadAsStringAsync();
 		var result = JsonConvert.DeserializeObject<MedicineSearchQueryResult>(responseString);
 
-		if (result is null || result.Hits is null ||result.Hits.Count == 0)
+		if (result is null || result.Hits is null)
 			return null;
 
-		return result.Hits.Select(this.MapQueryResultHitToMedicine).ToList();
+		return new MedicineSearchResult {
+			Pages = result.NbPages,
+			Hits = result.NbHits,
+			Page = result.Page,
+			PageContent = result.Hits.Select(this.MapQueryResultHitToMedicine).ToList() 
+		};
 	}
 
 	public async Task<Medicine?> FindByPznAsync(string pzn) {

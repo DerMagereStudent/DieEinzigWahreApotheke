@@ -17,7 +17,7 @@ public class MedicineController : ControllerBase {
 	[HttpPost]
 	[Route("search")]
 	public async Task<IActionResult> FindBySearchStringAsync([FromBody] FindMedicineBySearchStringRequestContract requestBody) {
-		return this.Ok(await this._medicineService.FindBySearchStringAsync(requestBody.SearchString, requestBody.MaxResults));
+		return this.Ok(await this._medicineService.FindBySearchStringAsync(requestBody.SearchString, requestBody.Page, requestBody.ItemsPerPage));
 	}
 	
 	[HttpPost]
