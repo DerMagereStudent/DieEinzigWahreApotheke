@@ -1,0 +1,15 @@
+<div style="width: 1200px; margin: 20px auto 50px auto">
+    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; align-content: center;">
+        <p style="font-size: 24px !important;"><strong>{{this.items}} Ergenisse für: </strong><i>{{this.query}}</i></p>
+        <p-paginator [rows]="this.itemsPerPage" [totalRecords]="this.items" (onPageChange)="onPageChange($event)" [templateLeft]="paginatorleft">
+            <ng-template #paginatorleft>
+                {{page * itemsPerPage + 1}} bis {{page >= pages - 1 ? items : (page + 1) * itemsPerPage}}
+            </ng-template>
+        </p-paginator>
+    </div>
+    <hr>
+    <app-search-result-item
+        *ngFor="let medicine of searchHits" [medicine]="medicine"
+        style="width: 70%; margin: 20px auto 0 auto; padding: 20px; display: flex; flex-direction: row; border: 1px #ccc solid; border-radius: 5px;">
+    </app-search-result-item>
+</div>
