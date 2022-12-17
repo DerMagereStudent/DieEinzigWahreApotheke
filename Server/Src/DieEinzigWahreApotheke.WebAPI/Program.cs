@@ -27,6 +27,7 @@ public static class Program {
 
 		Program.ConfigureControllers(builder);
 		Program.ConfigureScopedServices(builder);
+		builder.Services.AddAuthentication().AddCookie();
 		
 		// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 		builder.Services.AddEndpointsApiExplorer();
@@ -48,7 +49,7 @@ public static class Program {
 		}
 
 		app.UseHttpsRedirection();
-
+		
 		app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 		app.UseAuthentication();
