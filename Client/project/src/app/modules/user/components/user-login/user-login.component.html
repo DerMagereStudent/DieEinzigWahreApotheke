@@ -1,0 +1,20 @@
+<div class="flex flex-wrap justify-content-center align-items-center my-5">
+  <div class="surface-card p-4 shadow-2 border-round md:w-5">
+    <div class="text-center mb-5">
+      <img src="assets/logo.svg" alt="Image" height="50" class="mb-3">
+      <div class="text-900 text-3xl font-medium mb-3">Willkommen zurück</div>
+      <span class="text-600 font-medium line-height-3">Du hast noch keinen Account?</span>
+      <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" routerLink="/user/signup">Jetzt registrieren!</a>
+    </div>
+  
+    <form [formGroup]="formModel" #form='ngForm' (submit)="onSubmit()">
+      <label for="email" class="block text-900 font-medium mb-2">Email</label>
+      <input id="email" formControlName="email" type="text" placeholder="Email" pInputText class="w-full mb-3">
+
+      <label for="password" class="block text-900 font-medium mb-2">Passwort</label>
+      <input id="password" formControlName="password" type="password" placeholder="Passwort" pInputText class="w-full mb-3">
+
+      <button pButton pRipple label="Sign In" type="submit" icon="pi pi-user" class="w-full" [disabled]="!formModel.valid"></button>
+    </form>
+  </div>
+</div>

@@ -11,6 +11,12 @@ export const environment = {
     medicine: {
       findBySearchString: serverProtocolAndDomain + "/api/medicine/search",
     },
+    user: {
+      login: serverProtocolAndDomain + "/api/user/login",
+      signup: serverProtocolAndDomain + "/api/user/signup",
+      logout: serverProtocolAndDomain + "/api/user/logout",
+      checkAuthenticated: serverProtocolAndDomain + "/api/user/auth"
+    }
   }
 };
 

@@ -1,0 +1,67 @@
+<div class="flex flex-wrap justify-content-center align-items-center my-5">
+  <div class="surface-card p-4 shadow-2 border-round md:w-5">
+    <div class="text-center mb-5">
+      <img src="assets/logo.svg" alt="Image" height="50" class="mb-3">
+      <div class="text-900 text-3xl font-medium mb-3">Willkommen!</div>
+      <span class="text-600 font-medium line-height-3">Du hast bereits einen Account?</span>
+      <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" routerLink="/user/login">Jetzt einloggen!</a>
+    </div>
+  
+    <form [formGroup]="formModel" #form='ngForm' (submit)="onSubmit()">
+      <label for="email" class="block text-900 font-medium mb-2">Email</label>
+      <input id="email" formControlName="email" type="text" placeholder="Email" pInputText class="w-full mb-3">
+
+      <div class="w-full" formGroupName="passwords">
+        <label for="password1" class="block text-900 font-medium mb-2">Passwort</label>
+        <input id="password1" formControlName="password1" type="password" placeholder="Passwort" pInputText class="w-full mb-3">
+
+        <label for="password2" class="block text-900 font-medium mb-2">Passwort bestätigen</label>
+        <input id="password2" formControlName="password2" type="password" placeholder="Passwort bestätigen" pInputText class="w-full mb-3">
+      </div>
+
+      <div class="flex flex-nowrap gap-3">
+        <div class="w-3">
+          <label for="title" class="block text-900 font-medium mb-2">Anrede</label>
+          <p-dropdown id="title" formControlName="title" [options]="['Herr', 'Frau']" placeholder="Anrede" [showClear]="true" styleClass="w-full mb-3"></p-dropdown>
+        </div>
+        <div class="flex flex-nowrap gap-3">
+          <div class="w-6">
+            <label for="firstname" class="block text-900 font-medium mb-2">Vorname</label>
+            <input id="firstname" formControlName="firstname" type="text" placeholder="Vorname" pInputText class="w-full mb-3">
+          </div>
+          <div class="w-6">
+            <label for="lastname" class="block text-900 font-medium mb-2">Nachname</label>
+            <input id="lastname" formControlName="lastname" type="text" placeholder="Nachname" pInputText class="w-full mb-3">
+          </div>
+        </div>
+      </div>
+
+      <label for="birthday" class="block text-900 font-medium mb-2">Geburtstag</label>
+      <p-calendar id="birthday" formControlName="birthday" placeholder="Geburtstag" dateFormat="mm-dd-yy" [showIcon]="true" inputId="icon" styleClass="w-full mb-3"></p-calendar>
+
+      <div class="flex flex-nowrap gap-3">
+        <div class="w-9">
+          <label for="street" class="block text-900 font-medium mb-2">Straße</label>
+          <input id="street" formControlName="street" type="text" placeholder="Straße" pInputText class="w-full mb-3">
+        </div>
+        <div class="w-3">
+          <label for="housenr" class="block text-900 font-medium mb-2">Hausnummer</label>
+          <input id="housenr" formControlName="housenr" type="text" placeholder="Hausnummer" pInputText class="w-full mb-3">
+        </div>
+      </div>
+
+      <div class="flex flex-nowrap gap-3">
+        <div class="w-6">
+          <label for="state" class="block text-900 font-medium mb-2">Bundesland</label>
+          <input id="state" formControlName="state" type="text" placeholder="Bundesland" pInputText class="w-full mb-3">
+        </div>
+        <div class="w-6">
+          <label for="country" class="block text-900 font-medium mb-2">Land</label>
+          <input id="country" formControlName="country" type="text" placeholder="Land" pInputText class="w-full mb-3">
+        </div>
+      </div>
+
+      <button pButton pRipple label="Sign In" type="submit" icon="pi pi-user" class="w-full" [disabled]="!formModel.valid"></button>
+    </form>
+  </div>
+</div>
