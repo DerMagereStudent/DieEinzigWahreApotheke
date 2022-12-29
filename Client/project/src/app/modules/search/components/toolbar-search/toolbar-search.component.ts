@@ -30,4 +30,8 @@ export class ToolbarSearchComponent implements OnInit {
 
     this.router.navigate(['/search', ], {queryParams: {q: event.target.value}});
   }
+
+  public onItemSelected(selectedItem: Medicine): void {
+    this.router.navigate(['/search', "detail" ], {queryParams: {pzn: selectedItem.pzn}});
+  }
 }

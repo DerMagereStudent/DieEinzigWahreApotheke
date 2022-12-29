@@ -7,6 +7,7 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchResultItemComponent } from './components/search/components/search-result-item/search-result-item.component';
 import { CartModule } from '../cart/cart.module';
+import { DetailComponent } from './components/detail/detail.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { CartModule } from '../cart/cart.module';
     SearchModuleComponent,
     ToolbarSearchComponent,
     SearchComponent,
-    SearchResultItemComponent
+    SearchResultItemComponent,
+    DetailComponent
   ]
 })
 export class SearchModule { }
