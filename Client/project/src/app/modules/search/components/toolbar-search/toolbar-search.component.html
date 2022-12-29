@@ -1,5 +1,5 @@
 <p-autoComplete
-    appendTo="body"
+    appendTo="body" field="productName"
     [suggestions]="suggestions" placeholder="z.B. Produkt, Hersteller, Symptom, ..." (completeMethod)="inlineSearch($event)" (keydown.enter)="search($event)"
     [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
     <ng-template let-medicine pTemplate="item">

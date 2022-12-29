@@ -4,11 +4,16 @@ import { environment } from 'src/environments/environment';
 import { LoginRequestContract } from '../contracts/LoginRequestContract';
 import { SignUpRequestContract } from '../contracts/SignUpRequestContract';
 import { IdentityResult } from '../models/IdentityResult';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
 
 constructor(private httpService: HttpService) { }
+  public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
   public async login(body: LoginRequestContract) : Promise<IdentityResult> {
     return await this.httpService.post(environment.apiRoutes.user.login, body);
   }
@@ -22,6 +27,6 @@ constructor(private httpService: HttpService) { }
   }
 
   public async checkAuthenticated() : Promise<boolean> {
-    return await this.httpService.post(environment.apiRoutes.user.checkAuthenticated, {});
+    return await this.httpService.post(environment.apiRoutes.user.checkAuthenticated, {}).then(result => {this.isLoggedIn.next(result); return result;});
   }
 }

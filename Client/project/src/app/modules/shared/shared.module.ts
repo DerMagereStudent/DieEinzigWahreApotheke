@@ -13,6 +13,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {FileUploadModule} from 'primeng/fileupload';
+import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextModule} from 'primeng/inputtext';
 import {MenuModule} from 'primeng/menu';
 import {MultiSelectModule} from 'primeng/multiselect';
@@ -24,6 +25,7 @@ import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
 import { MessageService } from 'primeng/api';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   imports: [
@@ -39,6 +41,7 @@ import { MessageService } from 'primeng/api';
     DialogModule,
     DropdownModule,
     FileUploadModule,
+    InputNumberModule,
     InputTextModule,
     MenuModule,
     MultiSelectModule,
@@ -60,6 +63,7 @@ import { MessageService } from 'primeng/api';
     DialogModule,
     DropdownModule,
     FileUploadModule,
+    InputNumberModule,
     InputTextModule,
     MenuModule,
     MultiSelectModule,
@@ -73,9 +77,6 @@ import { MessageService } from 'primeng/api';
   ],
   declarations: [],
   providers: [
-    MedicineService,
-    UserService,
-    MessageService
   ]
 })
 export class SharedModule { }

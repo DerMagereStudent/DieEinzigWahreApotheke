@@ -2,7 +2,7 @@
 
 using DieEinzigWahreApotheke.Core.Entities;
 
-namespace DieEinzigWahreApotheke.WebAPI.Contracts; 
+namespace DieEinzigWahreApotheke.WebAPI.Contracts.User; 
 
 public class SignUpRequestContract {
 	[Required, EmailAddress]

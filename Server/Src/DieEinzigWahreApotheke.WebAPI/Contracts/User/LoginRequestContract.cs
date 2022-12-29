@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using DieEinzigWahreApotheke.Core.Entities;
-
-namespace DieEinzigWahreApotheke.WebAPI.Contracts; 
+namespace DieEinzigWahreApotheke.WebAPI.Contracts.User; 
 
 public class LoginRequestContract {
 	[Required, EmailAddress]

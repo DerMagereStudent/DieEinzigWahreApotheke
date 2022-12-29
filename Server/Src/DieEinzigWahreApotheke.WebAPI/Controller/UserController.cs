@@ -1,5 +1,6 @@
 ﻿using DieEinzigWahreApotheke.Core.Services;
 using DieEinzigWahreApotheke.WebAPI.Contracts;
+using DieEinzigWahreApotheke.WebAPI.Contracts.User;
 
 using Microsoft.AspNetCore.Mvc;
 

@@ -6,11 +6,13 @@ import { SharedModule } from '../shared/shared.module';
 import { SearchComponent } from './components/search/search.component';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchResultItemComponent } from './components/search/components/search-result-item/search-result-item.component';
+import { CartModule } from '../cart/cart.module';
 
 @NgModule({
   imports: [
     CommonModule,
     SearchRoutingModule,
+    CartModule,
     SharedModule,
   ],
   exports: [

@@ -1,0 +1,15 @@
+<div class="flex flex-row flex-nowrap align-items-center">
+  <div class="w-7 flex flex-row flex-nowrap align-items-center">
+    <img [src]="this.medicine?.imageLink" style="width:64px;height:64px;display:inline-block;margin:5px 0 2px 5px"/>
+    <p class="m-2 p-0" style="font-size:18px; text-overflow: ellipsis;">{{this.medicine?.productName}}</p>
+  </div>
+  <div class="w-3">
+    <p-inputNumber [(ngModel)]="quantity" [min]="0" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal" [step]="1"
+      decrementButtonClass="p-button-primary p-1 max-w-2rem" incrementButtonClass="p-button-primary p-1 max-w-2rem" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+      class="w-12 max-w-7rem" inputStyleClass="w-12 max-w-7rem p-1">
+    </p-inputNumber>
+  </div>
+  <div class="w-2">
+    <p>{{this.medicine?.priceFormatted}}</p>
+  </div>
+</div>

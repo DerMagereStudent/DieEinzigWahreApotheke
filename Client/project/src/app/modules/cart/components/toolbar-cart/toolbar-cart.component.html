@@ -1,0 +1,5 @@
+<div *ngIf="this.userService.isLoggedIn | async">
+  <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-text" routerLink="/cart">
+    <p>{{this.totalItemCount}}</p>
+  </button>
+</div>

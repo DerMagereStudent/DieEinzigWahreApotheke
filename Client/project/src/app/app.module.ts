@@ -8,10 +8,18 @@ import { AppComponent } from './app.component';
 import { SearchModule } from './modules/search/search.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { UserModule } from './modules/user/user.module';
+import { CartModule } from './modules/cart/cart.module';
+import { UserService } from './modules/shared/services/user.service';
+import { MedicineService } from './modules/shared/services/medicine.service';
+import { CartService } from './modules/shared/services/cart.service';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
     AppComponent
+  ],
+  exports: [
+    CartModule,
   ],
   imports: [
     BrowserModule,
@@ -19,11 +27,16 @@ import { UserModule } from './modules/user/user.module';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    CartModule,
     SearchModule,
     SharedModule,
     UserModule
   ],
-  providers: [],
+  providers: [
+    CartService,
+    MedicineService,
+    UserService,
+    MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

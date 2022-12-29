@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DieEinzigWahreApotheke.WebAPI.Contracts; 
+namespace DieEinzigWahreApotheke.WebAPI.Contracts.Medicine; 
 
 public class FindMedicineBySearchStringRequestContract {
 	[Required] public string SearchString { get; set; }

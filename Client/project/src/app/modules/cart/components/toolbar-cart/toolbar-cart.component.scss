@@ -1,0 +1,19 @@
+button {
+    padding: 0.714rem 0.5rem !important;
+    min-width: 3rem !important;
+    display: inline-block;
+    position: relative
+}
+
+p {
+    margin: 0 !important;
+    padding: 2px !important;
+    min-width: 23px;
+    height: 23px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-color) !important;
+    color: white !important;
+    border-radius: 100%;
+}

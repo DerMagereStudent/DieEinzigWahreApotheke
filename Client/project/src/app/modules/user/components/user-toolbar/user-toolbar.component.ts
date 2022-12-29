@@ -7,7 +7,6 @@ import { UserService } from 'src/app/modules/shared/services/user.service';
   styleUrls: ['./user-toolbar.component.scss']
 })
 export class UserToolbarComponent implements OnInit {
-  public isLoggedIn: boolean = false;
   public menuItems = [
     {
       label: "Profile",
@@ -22,7 +21,7 @@ export class UserToolbarComponent implements OnInit {
   ];
 
   constructor(public userService: UserService) {
-    this.userService.checkAuthenticated().then(result => this.isLoggedIn = result);
+    this.userService.checkAuthenticated();
   }
 
   ngOnInit() {

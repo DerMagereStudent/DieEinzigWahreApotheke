@@ -8,8 +8,13 @@ export const environment = {
   production: false,
   authTokenHeaderKey: "Authorization",
   apiRoutes: {
+    cart: {
+      index: serverProtocolAndDomain + "/api/cart"
+    },
     medicine: {
       findBySearchString: serverProtocolAndDomain + "/api/medicine/search",
+      findByPzn: serverProtocolAndDomain + "/api/medicine/search/pzn",
+      findByPzns: serverProtocolAndDomain + "/api/medicine/search/pzns",
     },
     user: {
       login: serverProtocolAndDomain + "/api/user/login",
