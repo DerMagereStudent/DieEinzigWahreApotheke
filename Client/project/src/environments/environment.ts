@@ -20,7 +20,11 @@ export const environment = {
       login: serverProtocolAndDomain + "/api/user/login",
       signup: serverProtocolAndDomain + "/api/user/signup",
       logout: serverProtocolAndDomain + "/api/user/logout",
-      checkAuthenticated: serverProtocolAndDomain + "/api/user/auth"
+      checkAuthenticated: serverProtocolAndDomain + "/api/user/auth",
+      addresses: serverProtocolAndDomain + "/api/user/addresses",
+    },
+    order: {
+      index: serverProtocolAndDomain + "/api/order",
     }
   }
 };

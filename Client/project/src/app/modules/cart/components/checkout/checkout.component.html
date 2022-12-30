@@ -1,0 +1,24 @@
+<div class="flex flex-wrap justify-content-center align-items-center my-5">
+  <div class="surface-card p-4 shadow-2 border-round md:w-7">
+    <div *ngIf="!this.orderPlaced">
+      <div class="text-900 text-3xl font-medium mb-3">Bestellen</div>
+      <hr>
+      <label for="shippingAddress"></label>
+      <p-dropdown [(ngModel)]="this.shippingAddressId" inputId="shippingAddress" [options]="this.addresses" optionLabel="text" optionValue="value" [showClear]="false" styleClass="w-full mb-3"></p-dropdown>
+
+      <p-checkbox [binary]="true" label="Abweichende Rechnungsadresse" [(ngModel)]="this.differentBillingAddress" class="mb-2"></p-checkbox>
+      <div *ngIf="this.differentBillingAddress">
+        <label for="billingAddress"></label>
+        <p-dropdown [(ngModel)]="this.billingAddressId" inputId="billingAddress" [options]="this.addresses" optionLabel="text" optionValue="value" [showClear]="false" styleClass="w-full mb-3"></p-dropdown>
+      </div>
+
+      <div class="flex flex-row justify-content-end">
+        <button pButton pRipple label="Bestellen" class="p-button-primary" (click)="placeOrder()"></button>
+      </div>
+    </div>
+    <div *ngIf="this.orderPlaced">
+      <div class="text-900 text-3xl font-medium mb-3">Vielen Danke für ihre Bestellung</div>
+      <p class="p-2">Die Id ihrer Bestellung lautet: <strong>{{this.orderId!}}</strong></p>
+    </div>
+  </div>
+</div>

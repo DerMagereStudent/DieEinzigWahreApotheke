@@ -13,6 +13,7 @@ import { UserService } from './modules/shared/services/user.service';
 import { MedicineService } from './modules/shared/services/medicine.service';
 import { CartService } from './modules/shared/services/cart.service';
 import { MessageService } from 'primeng/api';
+import { OrderService } from './modules/shared/services/order.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MessageService } from 'primeng/api';
   providers: [
     CartService,
     MedicineService,
+    OrderService,
     UserService,
     MessageService],
   bootstrap: [AppComponent]

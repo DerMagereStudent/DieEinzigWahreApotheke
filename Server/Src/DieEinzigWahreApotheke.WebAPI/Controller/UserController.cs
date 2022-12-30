@@ -53,7 +53,7 @@ public class UserController : ControllerBase {
 	[HttpGet]
 	[Route("addresses")]
 	[Authorize]
-	public IActionResult GetAddressesAsync() {
-		return this.Ok(this._userService.GetAddressesAsync(this._userManager.GetUserId(this.User)!));
+	public async Task<IActionResult> GetAddressesAsync() {
+		return this.Ok(await this._userService.GetAddressesAsync(this._userManager.GetUserId(this.User)!));
 	}
 }

@@ -7,6 +7,7 @@ import { ToolbarCartComponent } from './components/toolbar-cart/toolbar-cart.com
 import { CartComponent } from './components/cart/cart.component';
 import { CartRoutingModule } from './cart-routing.module';
 import { CartItemComponent } from './components/cart/components/cart-item/cart-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { CartItemComponent } from './components/cart/components/cart-item/cart-i
     AddToCartComponent,
     ToolbarCartComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    CheckoutComponent
   ]
 })
 export class CartModule { }

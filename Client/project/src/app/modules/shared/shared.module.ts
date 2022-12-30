@@ -9,6 +9,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
 import {CardModule} from 'primeng/card';
+import {CheckboxModule} from 'primeng/checkbox';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
@@ -37,6 +38,7 @@ import { CartService } from './services/cart.service';
     ButtonModule,
     CalendarModule,
     CardModule,
+    CheckboxModule,
     ContextMenuModule,
     DialogModule,
     DropdownModule,
@@ -59,6 +61,7 @@ import { CartService } from './services/cart.service';
     ButtonModule,
     CalendarModule,
     CardModule,
+    CheckboxModule,
     ContextMenuModule,
     DialogModule,
     DropdownModule,

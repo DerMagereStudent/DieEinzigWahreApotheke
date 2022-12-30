@@ -17,8 +17,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
 	protected override void OnModelCreating(ModelBuilder builder) {
 		base.OnModelCreating(builder);
 
-		builder.Entity<UserAddress>(address => {
+		builder.Entity<Address>(address => {
 			address.HasKey(a => a.Id);
+		});
+		
+		builder.Entity<UserAddress>(address => {
 			address.HasOne<ApplicationUser>()
 				.WithMany()
 				.HasForeignKey(a => a.UserId)

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { environment } from 'src/environments/environment';
-import { LoginRequestContract } from '../contracts/LoginRequestContract';
-import { SignUpRequestContract } from '../contracts/SignUpRequestContract';
+import { LoginRequestContract } from '../contracts/user/LoginRequestContract';
+import { SignUpRequestContract } from '../contracts/user/SignUpRequestContract';
 import { IdentityResult } from '../models/IdentityResult';
 import { BehaviorSubject } from 'rxjs';
+import { Address } from '../models/Address';
+import { ApplicationResult } from '../models/ApplicationResult';
 
 @Injectable({
   providedIn: 'root',
@@ -28,5 +30,9 @@ constructor(private httpService: HttpService) { }
 
   public async checkAuthenticated() : Promise<boolean> {
     return await this.httpService.post(environment.apiRoutes.user.checkAuthenticated, {}).then(result => {this.isLoggedIn.next(result); return result;});
+  }
+
+  public async getAddresses(): Promise<ApplicationResult<Address[]>> {
+    return await this.httpService.get(environment.apiRoutes.user.addresses);
   }
 }

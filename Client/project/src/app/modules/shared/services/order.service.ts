@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { HttpService } from './http.service';
+import { environment } from 'src/environments/environment';
+import { LoginRequestContract } from '../contracts/user/LoginRequestContract';
+import { SignUpRequestContract } from '../contracts/user/SignUpRequestContract';
+import { IdentityResult } from '../models/IdentityResult';
+import { BehaviorSubject } from 'rxjs';
+import { Address } from '../models/Address';
+import { GetOrdersRequestContract } from '../contracts/order/GetOrderRequestContract';
+import { ApplicationResult } from '../models/ApplicationResult';
+import { Order } from '../models/Order';
+import { PlaceOrderRequestContract } from '../contracts/order/PlaceOrderRequestContract';
+import { CancelOrderRequestContract } from '../contracts/order/CancelOrderRequestContract';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class OrderService {
+
+constructor(private httpService: HttpService) { }
+  public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  public async getOrders(data: GetOrdersRequestContract) : Promise<ApplicationResult<Order[]>> {
+    return await this.httpService.get(environment.apiRoutes.order.index + `?page=${data.page}&itemPerPage=${data.itemsPerPage}`);
+  }
+
+  public async placeOrder(body: PlaceOrderRequestContract) : Promise<ApplicationResult<string>> {
+    return await this.httpService.post(environment.apiRoutes.order.index, body);
+  }
+
+  public async cancelOrder(body: CancelOrderRequestContract) : Promise<ApplicationResult<void>> {
+    return await this.httpService.delete(environment.apiRoutes.order.index, body);
+  }
+}
