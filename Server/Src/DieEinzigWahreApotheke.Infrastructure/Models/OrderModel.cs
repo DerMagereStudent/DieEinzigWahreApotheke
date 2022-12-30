@@ -2,7 +2,8 @@
 
 namespace DieEinzigWahreApotheke.Infrastructure.Models; 
 
-public class UserAddress : Address {
+public class OrderModel : Order {
 	public string UserId { get; set; }
-	public bool IsDeleted { get; set; }
+	public string ShippingAddressId { get; set; }
+	public string BillingAddressId { get; set; }
 }

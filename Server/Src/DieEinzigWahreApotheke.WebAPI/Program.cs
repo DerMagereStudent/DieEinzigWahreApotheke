@@ -95,6 +95,7 @@ public static class Program {
 	
 	private static void ConfigureScopedServices(WebApplicationBuilder builder) {
 		builder.Services.AddScoped<IMedicineService, MedicineService>();
+		builder.Services.AddScoped<IOrderService, OrderService>();
 		builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 		builder.Services.AddScoped<IUserService, UserService>();
 	}

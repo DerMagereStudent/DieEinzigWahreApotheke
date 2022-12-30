@@ -1,7 +1,10 @@
 ﻿using DieEinzigWahreApotheke.Core.Services;
+using DieEinzigWahreApotheke.Infrastructure.Models;
 using DieEinzigWahreApotheke.WebAPI.Contracts;
 using DieEinzigWahreApotheke.WebAPI.Contracts.User;
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DieEinzigWahreApotheke.WebAPI.Controller; 
@@ -10,9 +13,11 @@ namespace DieEinzigWahreApotheke.WebAPI.Controller;
 [Route("api/user")]
 public class UserController : ControllerBase {
 	private readonly IUserService _userService;
+	private readonly UserManager<ApplicationUser> _userManager;
 
-	public UserController(IUserService userService) {
+	public UserController(IUserService userService, UserManager<ApplicationUser> userManager) {
 		this._userService = userService;
+		this._userManager = userManager;
 	}
 	
 	[HttpPost]
@@ -33,6 +38,7 @@ public class UserController : ControllerBase {
 	
 	[HttpPost]
 	[Route("logout")]
+	[Authorize]
 	public async Task<IActionResult> LogoutAsync() {
 		await this._userService.LogoutAsync();
 		return this.Ok();
@@ -42,5 +48,12 @@ public class UserController : ControllerBase {
 	[Route("auth")]
 	public IActionResult CheckIfAuthenticated() {
 		return this.Ok(this._userService.CheckIfAuthenticated());
+	}
+	
+	[HttpGet]
+	[Route("addresses")]
+	[Authorize]
+	public IActionResult GetAddressesAsync() {
+		return this.Ok(this._userService.GetAddressesAsync(this._userManager.GetUserId(this.User)!));
 	}
 }

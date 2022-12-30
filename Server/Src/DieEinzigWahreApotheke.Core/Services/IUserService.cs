@@ -1,4 +1,5 @@
 ﻿using DieEinzigWahreApotheke.Core.Entities;
+using DieEinzigWahreApotheke.Core.ValueTypes;
 
 using Microsoft.AspNetCore.Identity;
 
@@ -9,4 +10,7 @@ public interface IUserService {
 	Task<IdentityResult> LoginAsync(string email, string password);
 	Task LogoutAsync();
 	bool CheckIfAuthenticated();
+	Task<ApplicationResult<Address[]>> GetAddressesAsync(string userId);
+	Task<ApplicationResult<Address>> AddAddressAsync(string userId, Address address);
+	Task<ApplicationResult> RemoveAddressAsync(string addressId);
 }

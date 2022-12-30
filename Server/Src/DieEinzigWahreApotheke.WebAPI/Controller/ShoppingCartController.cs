@@ -2,6 +2,7 @@
 using DieEinzigWahreApotheke.Infrastructure.Models;
 using DieEinzigWahreApotheke.WebAPI.Contracts.Cart;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,21 +20,25 @@ public class ShoppingCartController : ControllerBase {
 	}
 
 	[HttpGet]
+	[Authorize]
 	public async Task<IActionResult> GetCartAsync() {
 		return this.Ok(await this._shoppingCartService.GetCartAsync(this._userManager.GetUserId(this.User)!));
 	}
 	
 	[HttpPost]
+	[Authorize]
 	public async Task<IActionResult> AddToCartAsync([FromBody] AddCartItemRequestContract requestBody) {
 		return this.Ok(await this._shoppingCartService.AddToCartAsync(this._userManager.GetUserId(this.User)!, requestBody.Pzn, requestBody.Quantity));
 	}
 
 	[HttpDelete]
+	[Authorize]
 	public async Task<IActionResult> RemoveFromCartAsync([FromBody] RemoveCartItemRequestContract requestBody) {
 		return this.Ok(await this._shoppingCartService.RemoveFromCartAsync(this._userManager.GetUserId(this.User)!, requestBody.Pzn));
 	}
 
 	[HttpPut]
+	[Authorize]
 	public async Task<IActionResult> UpdateQuantityAsync([FromBody] UpdateCartItemQuantityRequestContract requestBody) {
 		return this.Ok(await this._shoppingCartService.UpdateQuantityAsync(this._userManager.GetUserId(this.User)!, requestBody.Pzn, requestBody.Quantity));
 	}

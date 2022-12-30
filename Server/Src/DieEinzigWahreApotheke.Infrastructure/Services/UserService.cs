@@ -1,5 +1,8 @@
-﻿using DieEinzigWahreApotheke.Core.Entities;
+﻿using DerMagereStudent.EntityFrameworkCore.Extensions;
+
+using DieEinzigWahreApotheke.Core.Entities;
 using DieEinzigWahreApotheke.Core.Services;
+using DieEinzigWahreApotheke.Core.ValueTypes;
 using DieEinzigWahreApotheke.Infrastructure.Database;
 using DieEinzigWahreApotheke.Infrastructure.Models;
 
@@ -7,6 +10,7 @@ using Mapster;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace DieEinzigWahreApotheke.Infrastructure.Services; 
 
@@ -75,5 +79,54 @@ public class UserService : IUserService {
 
 	public bool CheckIfAuthenticated() {
 		return this._signInManager.IsSignedIn(this._httpContextAccessor.HttpContext.User);
+	}
+
+	public async Task<ApplicationResult<Address[]>> GetAddressesAsync(string userId) {
+		try {
+			var addresses = await this._applicationDbContext.UserAddresses
+				.Where(a => a.UserId == userId)
+				.ToArrayAsync();
+
+			return ApplicationResult<Address[]>.Success(addresses.Adapt<Address[]>());
+		}
+		catch (Exception e) {
+			return ApplicationResult<Address[]>.Failed(new ApplicationError {Code = e.GetType().Name, Description = e.Message});
+		}
+	}
+	
+	public async Task<ApplicationResult<Address>> AddAddressAsync(string userId, Address address) {
+		try {
+			var userAddress = new UserAddress {
+				UserId = userId,
+				Street = address.Street,
+				HouseNr = address.HouseNr,
+				State = address.State,
+				Country = address.State
+			};
+
+			this._applicationDbContext.UserAddresses.Add(userAddress);
+			await this._applicationDbContext.SaveChangesAsync();
+			
+			return ApplicationResult<Address>.Success(userAddress.Adapt<Address>());
+		}
+		catch (Exception e) {
+			return ApplicationResult<Address>.Failed(new ApplicationError {Code = e.GetType().Name, Description = e.Message});
+		}
+	}
+	
+	public async Task<ApplicationResult> RemoveAddressAsync(string addressId) {
+		try {
+			var userAddress = await this._applicationDbContext.UserAddresses.FindTrackedAsync(new UserAddress {Id = addressId});
+			if (userAddress is null)
+				return ApplicationResult.Success();
+
+			this._applicationDbContext.UserAddresses.Remove(userAddress);
+			await this._applicationDbContext.SaveChangesAsync();
+			
+			return ApplicationResult.Success();
+		}
+		catch (Exception e) {
+			return ApplicationResult.Failed(new ApplicationError {Code = e.GetType().Name, Description = e.Message});
+		}
 	}
 }
