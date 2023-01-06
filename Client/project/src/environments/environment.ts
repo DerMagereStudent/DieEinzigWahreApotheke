@@ -21,10 +21,12 @@ export const environment = {
       signup: serverProtocolAndDomain + "/api/user/signup",
       logout: serverProtocolAndDomain + "/api/user/logout",
       checkAuthenticated: serverProtocolAndDomain + "/api/user/auth",
+      info: serverProtocolAndDomain + "/api/user/info",
       addresses: serverProtocolAndDomain + "/api/user/addresses",
     },
     order: {
       index: serverProtocolAndDomain + "/api/order",
+      approve: serverProtocolAndDomain + "/api/order/approve"
     }
   }
 };

@@ -1,0 +1,12 @@
+<div class="flex flex-row flex-nowrap align-items-center">
+  <div class="w-7 flex flex-row flex-nowrap align-items-center">
+    <img [src]="this.medicine?.imageLink" style="width:64px;height:64px;display:inline-block;margin:5px 0 2px 5px"/>
+    <p class="m-2 p-0" style="font-size:18px; text-overflow: ellipsis;">{{this.medicine?.productName}}</p>
+  </div>
+  <div class="w-3">
+    <p>{{this.orderItem?.quantity}}x</p>
+  </div>
+  <div class="w-2">
+    <p>€ {{(this.orderItem?.prize ?? 0) / 100}}</p>
+  </div>
+</div>

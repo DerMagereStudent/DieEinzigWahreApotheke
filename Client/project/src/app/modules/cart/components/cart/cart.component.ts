@@ -20,7 +20,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService, private medicineService: MedicineService) { }
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.cartService.cart.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: cart => {        
         this.medicineService.findByPzns({pzns: cart.map(i => i.pzn)})
@@ -37,10 +37,10 @@ export class CartComponent implements OnInit, OnDestroy {
               .reduce((sum, current) => sum + current, 0) / 100;
 
             this.dataLoaded = true;
-          })
+          });
       }
-    })
-    this.cartService.getCart();
+    });
+    await this.cartService.getCart();
   }
 
   ngOnDestroy(): void {

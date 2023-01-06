@@ -1,4 +1,4 @@
-<div class="flex flex-row flex-nowrap justify-content-end gap-1">
+<div class="flex flex-row flex-nowrap justify-content-end gap-1" *ngIf="!this.deactivateCart">
   <p-inputNumber class="w-4" [(ngModel)]="quantity" mode="decimal" [showButtons]="true" [min]="1" inputStyleClass="w-4 p-2"></p-inputNumber>
   <button pButton pRipple type="button" icon="pi pi-shopping-cart" (click)="addToCart()"></button>
 </div>

@@ -1,4 +1,5 @@
 using DieEinzigWahreApotheke.Core.Services;
+using DieEinzigWahreApotheke.Core.ValueTypes;
 using DieEinzigWahreApotheke.Infrastructure.Database;
 using DieEinzigWahreApotheke.Infrastructure.Models;
 using DieEinzigWahreApotheke.Infrastructure.Services;
@@ -39,9 +40,11 @@ public static class Program {
 		Program.ConfigureHttpPipeline(app);
 		
 		// Create database tables
-		using (var scope = app.Services.CreateScope())
+		using (var scope = app.Services.CreateScope()) {
 			await scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.EnsureCreatedAsync();
-		
+			await Program.SeedUsersAndRolesAsynd(scope.ServiceProvider);
+		}
+
 		await app.RunAsync();
 	}
 	
@@ -73,13 +76,21 @@ public static class Program {
 		}
 
 		app.UseHttpsRedirection();
-		
+
+		var contextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
 		app.UseCors(
 			policyBuilder => policyBuilder
 				.AllowAnyMethod()
 				.AllowAnyHeader()
 				.AllowCredentials()
-				.SetIsOriginAllowed(o => true)
+				.SetIsOriginAllowed(origin => {
+					if (
+						contextAccessor.HttpContext!.Request.Path == "/api/order/approve" && contextAccessor.HttpContext!.Request.Method == HttpMethods.Post ||
+						contextAccessor.HttpContext!.Request.Path == "/api/order" && contextAccessor.HttpContext!.Request.Method == HttpMethods.Get)
+						return true;
+
+					return origin == "http://localhost:4200";
+				})
 				.WithExposedHeaders("set-cookie")
 		);
 
@@ -119,5 +130,26 @@ public static class Program {
 		builder.Services.ConfigureApplicationCookie(options => {
 			options.Cookie.SameSite = SameSiteMode.None;
 		});
+	}
+
+	private static async Task SeedUsersAndRolesAsynd(IServiceProvider serviceProvider) {
+		var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+		var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+		var pharmacist = new ApplicationUser {
+			UserName = "admin@apotheke.de",
+			Email = "admin@apotheke.de",
+			Title = "Herr",
+			FirstName = "Max",
+			LastName = "Mustermann",
+			Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
+		}; 
+		
+		await userManager.CreateAsync(pharmacist, "AdminPwd1423.");
+
+		await roleManager.CreateAsync(new IdentityRole(Roles.Customer));
+		await roleManager.CreateAsync(new IdentityRole(Roles.Pharmacist));
+
+		await userManager.AddToRoleAsync(pharmacist, Roles.Pharmacist);
 	}
 }

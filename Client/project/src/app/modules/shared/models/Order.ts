@@ -7,5 +7,6 @@ export interface Order {
     items: OrderItem[];
     shippingAddress: Address;
     billingAddress: Address;
+    total: number;
     isCanceled: boolean;
 }

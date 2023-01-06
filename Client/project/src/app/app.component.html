@@ -1,10 +1,11 @@
 <p-toolbar class="w-full">
   <div class="col-offset-2 md:col-8 flex flex-nowrap justify-content-between">
-    <div class="p-toolbar-group-left">
+    <div class="p-toolbar-group-left" style="cursor: pointer;" routerLink="/">
       <img src="/assets/logo.svg" alt="" style="width: 60px">
       <h2 style="color: var(--primary-color)">Die einzig wahre Apotheke</h2>
     </div>
     <div class="p-toolbar-group-right" style="display: flex; gap: 10px;">
+      <app-toolbar-all-orders></app-toolbar-all-orders>
       <app-toolbar-search style="width: 400px"></app-toolbar-search>
       <app-toolbar-cart></app-toolbar-cart>
       <app-user-toolbar></app-user-toolbar>

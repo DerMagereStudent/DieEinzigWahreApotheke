@@ -14,6 +14,7 @@ import { MedicineService } from './modules/shared/services/medicine.service';
 import { CartService } from './modules/shared/services/cart.service';
 import { MessageService } from 'primeng/api';
 import { OrderService } from './modules/shared/services/order.service';
+import { OrderModule } from './modules/order/order.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OrderService } from './modules/shared/services/order.service';
     CartModule,
     SearchModule,
     SharedModule,
-    UserModule
+    UserModule,
+    OrderModule
   ],
   providers: [
     CartService,

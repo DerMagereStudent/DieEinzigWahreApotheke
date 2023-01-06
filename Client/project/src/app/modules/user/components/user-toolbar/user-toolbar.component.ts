@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/modules/shared/services/user.service';
 
 @Component({
@@ -10,7 +11,9 @@ export class UserToolbarComponent implements OnInit {
   public menuItems = [
     {
       label: "Profile",
-      command: () => {/*profile*/}
+      command: () => {
+        this.router.navigateByUrl("/user/profile");
+      }
     },
     {
       label: "Logout",
@@ -20,7 +23,7 @@ export class UserToolbarComponent implements OnInit {
     }
   ];
 
-  constructor(public userService: UserService) {
+  constructor(private router: Router, public userService: UserService) {
     this.userService.checkAuthenticated();
   }
 

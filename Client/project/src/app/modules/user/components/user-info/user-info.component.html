@@ -1,0 +1,24 @@
+<div class="w-full flex flex-row flew-nowrap justify-content-start align-items-center">
+  <div class="text-900 text-3xl font-medium">Nutzerinfo</div>
+</div>
+<hr>
+<div class="flex flex-row gap-3">
+  <div class="flex flex-column w-6">
+    <div class="flex flex-row flex-nowrap my-2"><strong class="w-4">Anrede:</strong><p class="w-8 m-0">{{this.userInfo?.title}}</p></div>
+    <div class="flex flex-row flex-nowrap my-2"><strong class="w-4">Vorname:</strong><p class="w-8 m-0">{{this.userInfo?.firstName}}</p></div>
+    <div class="flex flex-row flex-nowrap my-2"><strong class="w-4">Nachname:</strong><p class="w-8 m-0">{{this.userInfo?.lastName}}</p></div>
+    <div class="flex flex-column mt-2">
+      <strong>Adressen:</strong>
+      <p *ngFor="let address of this.userInfo?.addresses" class="w-12 m-0">{{address.street}} {{address.houseNr}}, {{address.state}}, {{address.country}}</p>
+    </div>
+  </div>
+  <div class="flex flex-column w-6">
+    <div class="flex flex-row flex-nowrap my-2"><strong class="w-4">Email:</strong><p class="w-8 m-0">{{this.userInfo?.email}}</p></div>
+    <div class="flex flex-row flex-nowrap my-2">
+      <strong class="w-4">Roles:</strong>
+      <div>
+        <p class="w-8 m-0" *ngFor="let role of this.userInfo?.roles">{{role}}</p>
+      </div>
+    </div>
+  <div class="flex flex-column w-6">
+</div>

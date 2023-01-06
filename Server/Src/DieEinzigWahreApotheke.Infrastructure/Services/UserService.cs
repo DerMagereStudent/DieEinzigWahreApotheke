@@ -45,10 +45,13 @@ public class UserService : IUserService {
 		};
 
 		var creationResult = await this._userManager.CreateAsync(user, password);
-
 		if (!creationResult.Succeeded)
 			return creationResult;
 
+		var addToRoleResult = await this._userManager.AddToRoleAsync(user, Roles.Customer);
+		if (!addToRoleResult.Succeeded)
+			return addToRoleResult;
+		
 		var userAddress = address.Adapt<UserAddress>();
 		userAddress.Id = Guid.NewGuid().ToString();
 		userAddress.UserId = user.Id;
@@ -79,6 +82,28 @@ public class UserService : IUserService {
 
 	public bool CheckIfAuthenticated() {
 		return this._signInManager.IsSignedIn(this._httpContextAccessor.HttpContext.User);
+	}
+
+	public async Task<ApplicationResult<UserInfo>> GetUserInfoAsync(string userId) {
+		try {
+			var user = (await this._userManager.FindByIdAsync(userId))!;
+			var roles = await this._userManager.GetRolesAsync(user);
+			var addresses = await this._applicationDbContext.UserAddresses
+				.Where(a => a.UserId == userId)
+				.ToArrayAsync();
+
+			return ApplicationResult<UserInfo>.Success(new UserInfo {
+				Email = user.Email!,
+				Title = user.Title,
+				FirstName = user.FirstName,
+				LastName = user.LastName,
+				Roles = roles.ToArray(),
+				Addresses = addresses.Adapt<Address[]>()
+			});
+		}
+		catch (Exception e) {
+			return ApplicationResult<UserInfo>.Failed(new ApplicationError {Code = e.GetType().Name, Description = e.Message});
+		}
 	}
 
 	public async Task<ApplicationResult<Address[]>> GetAddressesAsync(string userId) {

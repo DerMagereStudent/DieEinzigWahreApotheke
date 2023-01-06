@@ -1,0 +1,18 @@
+<div class="p-3" style="border: 1px solid #ccc; border-radius: 4px;">
+  <div class="text-500 text-2xl font-medium mb-3">
+    {{this.order?.id}}
+    <strong style="color: black">vom</strong>
+    {{this.order?.timePlaced | date: 'dd/MM/yyyy hh:mm'}}
+  </div>
+  <div *ngIf="this.dataLoaded">
+    <hr>
+    <app-user-order-item *ngFor="let item of this.order?.items" [medicine]="this.medicine[item.pzn]" [orderItem]="item"></app-user-order-item>
+    <hr>
+    <div class="flex flex-row justify-content-end">
+      <p class="pr-2"><strong>Total: </strong></p>
+      <div class="w-2">
+        <p>€ {{(this.order?.total ?? 0) / 100}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from 'src/app/modules/shared/models/Address';
 import { CartService } from 'src/app/modules/shared/services/cart.service';
 import { OrderService } from 'src/app/modules/shared/services/order.service';
 import { UserService } from 'src/app/modules/shared/services/user.service';

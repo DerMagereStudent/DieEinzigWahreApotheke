@@ -6,7 +6,8 @@ public class Order {
 	public List<OrderItem> Items { get; set; }
 	public Address ShippingAddress { get; set; }
 	public Address BillingAddress { get; set; }
-	public bool IsCanceled { get; set; }
+	public int Total { get; set; }
+	public OrderState State { get; set; }
 
 	public Order() {
 		this.Id = Guid.NewGuid().ToString();

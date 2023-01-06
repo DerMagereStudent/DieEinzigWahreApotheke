@@ -7,13 +7,14 @@ import { ToolbarCartComponent } from './components/toolbar-cart/toolbar-cart.com
 import { CartComponent } from './components/cart/cart.component';
 import { CartRoutingModule } from './cart-routing.module';
 import { CartItemComponent } from './components/cart/components/cart-item/cart-item.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrderModule } from '../order/order.module';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    CartRoutingModule
+    CartRoutingModule,
+    OrderModule
   ],
   exports: [
     AddToCartComponent,
@@ -24,8 +25,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     AddToCartComponent,
     ToolbarCartComponent,
     CartComponent,
-    CartItemComponent,
-    CheckoutComponent
+    CartItemComponent
   ]
 })
 export class CartModule { }

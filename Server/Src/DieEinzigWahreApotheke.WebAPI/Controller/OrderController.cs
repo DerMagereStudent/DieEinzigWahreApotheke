@@ -1,8 +1,7 @@
 ﻿using DieEinzigWahreApotheke.Core.Services;
+using DieEinzigWahreApotheke.Core.ValueTypes;
 using DieEinzigWahreApotheke.Infrastructure.Models;
 using DieEinzigWahreApotheke.WebAPI.Contracts.Order;
-
-using Docker.DotNet.Models;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -37,5 +36,19 @@ public class OrderController : ControllerBase {
 	[Authorize]
 	public async Task<IActionResult> CancelOrderAsync([FromBody] CancelOrderRequestContract requestData) {
 		return this.Ok(await this._orderService.CancelOrderAsync(this._userManager.GetUserId(this.User)!, requestData.OrderId));
+	}
+
+	[HttpGet]
+	[Route("approve")]
+	[Authorize(Roles = Roles.Pharmacist)]
+	public async Task<IActionResult> GetOrdersToApproveAsync([FromQuery] GetOrdersToApproveRequestContract requestData) {
+		return this.Ok(await this._orderService.GetOrdersToApproveAsync(requestData.Page, requestData.ItemsPerPage));
+	}
+
+	[HttpPost]
+	[Route("approve")]
+	[Authorize(Roles = Roles.Pharmacist)]
+	public async Task<IActionResult> ApproveOrderAsync([FromBody] ApproveOrderRequestContract requestData) {
+		return this.Ok(await this._orderService.ApproveOrderAsync(requestData.OrderId));
 	}
 }

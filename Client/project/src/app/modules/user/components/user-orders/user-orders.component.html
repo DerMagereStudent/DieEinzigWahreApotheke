@@ -1,0 +1,12 @@
+<div class="w-full flex flex-row flew-nowrap justify-content-between align-items-center">
+  <div class="text-900 text-3xl font-medium">Bestellungen</div>
+  <p-paginator [rows]="this.itemsPerPage" [totalRecords]="this.totalItemCount" (onPageChange)="onPageChange($event)" [templateLeft]="paginatorleft">
+    <ng-template #paginatorleft>
+        {{this.page * this.itemsPerPage + 1}} bis {{this.page >= this.pages - 1 ? this.orders.length : (this.page + 1) * this.itemsPerPage}}
+    </ng-template>
+  </p-paginator>
+</div>
+<hr>
+<div class="flex flex-column gap-3">
+  <app-user-order *ngFor="let order of this.orders" [order]="order"></app-user-order>
+</div>

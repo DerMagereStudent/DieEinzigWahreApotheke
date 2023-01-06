@@ -1,0 +1,23 @@
+<div class="p-3" style="border: 1px solid #ccc; border-radius: 4px;">
+  <div class="text-500 text-2xl font-medium mb-3">
+    {{this.order?.id}}
+    <strong style="color: black">vom</strong>
+    {{this.order?.timePlaced | date: 'dd/MM/yyyy hh:mm'}}
+  </div>
+  <div *ngIf="this.dataLoaded">
+    <hr>
+    <div class="flex flex-row flex-nowrap align-items-center" *ngFor="let item of this.order?.items">
+      <div class="w-11 flex flex-row flex-nowrap align-items-center">
+        <img [src]="this.medicine[item.pzn].imageLink" style="width:64px;height:64px;display:inline-block;margin:5px 0 2px 5px"/>
+        <p class="m-2 p-0" style="font-size:18px; text-overflow: ellipsis;">{{this.medicine[item.pzn].productName}}</p>
+      </div>
+      <div class="w-1">
+        <p>{{this.item?.quantity}}x</p>
+      </div>
+    </div>
+    <hr>
+    <div class="flex flex-row justify-content-end">
+      <button pButton pRippe label="Freigeben" class="p-button-success" (click)="approveOrder()"></button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="flex flex-wrap justify-content-center align-items-center my-5">
+  <div class="surface-card shadow-2 border-round md:w-7 p-5 min-w-max">
+    <div class="w-full flex flex-row flew-nowrap justify-content-between align-items-center">
+      <div class="text-900 text-3xl font-medium">Bestellungen</div>
+      <p-paginator [rows]="this.itemsPerPage" [totalRecords]="this.totalItemCount" (onPageChange)="onPageChange($event)" [templateLeft]="paginatorleft">
+        <ng-template #paginatorleft>
+            {{this.page * this.itemsPerPage + 1}} bis {{this.page >= this.pages - 1 ? this.orders.length : (this.page + 1) * this.itemsPerPage}}
+        </ng-template>
+      </p-paginator>
+    </div>
+    <hr>
+    <div class="flex flex-column gap-3">
+      <app-all-orders-item *ngFor="let order of this.orders" [order]="order" (onOrderApproved)="loadOrders()"></app-all-orders-item>
+    </div>
+  </div>
+</div>

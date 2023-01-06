@@ -1,4 +1,4 @@
-<div *ngIf="this.userService.isLoggedIn | async">
+<div *ngIf="this.isLoggedIn && !this.deactivateCart">
   <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-text" routerLink="/cart">
     <p>{{this.totalItemCount}}</p>
   </button>

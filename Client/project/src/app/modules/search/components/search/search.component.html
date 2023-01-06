@@ -1,4 +1,4 @@
-<div style="width: 1200px; margin: 20px auto 50px auto">
+<div class="md:w-10" style="max-width: 1200px !important; margin: 20px auto 50px auto">
     <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; align-content: center;">
         <p style="font-size: 24px !important;"><strong>{{this.items}} Ergenisse für: </strong><i>{{this.query}}</i></p>
         <p-paginator [rows]="this.itemsPerPage" [totalRecords]="this.items" (onPageChange)="onPageChange($event)" [templateLeft]="paginatorleft">
