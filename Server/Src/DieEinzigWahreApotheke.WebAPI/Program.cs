@@ -15,10 +15,10 @@ using Microsoft.OpenApi.Models;
 namespace DieEinzigWahreApotheke.WebAPI; 
 
 public static class Program {
-	public static TestcontainerDatabase TemporaryDatabaseContainer { get; set; }
+	/*public static TestcontainerDatabase TemporaryDatabaseContainer { get; set; }*/
 	
 	public static async Task Main(string[] args) {
-		Program.TemporaryDatabaseContainer = new TestcontainersBuilder<PostgreSqlTestcontainer>()
+		/*Program.TemporaryDatabaseContainer = new TestcontainersBuilder<PostgreSqlTestcontainer>()
 			.WithDatabase(new PostgreSqlTestcontainerConfiguration {
 				Database = "ApothekeDatabase",
 				Username = "DatabaseUser",
@@ -26,7 +26,7 @@ public static class Program {
 			})
 			.Build();
 
-		await Program.TemporaryDatabaseContainer.StartAsync();
+		await Program.TemporaryDatabaseContainer.StartAsync();*/
 		
 		var builder = WebApplication.CreateBuilder(args);
 		
@@ -84,9 +84,8 @@ public static class Program {
 				.AllowAnyHeader()
 				.AllowCredentials()
 				.SetIsOriginAllowed(origin => {
-					if (
-						contextAccessor.HttpContext!.Request.Path == "/api/order/approve" && contextAccessor.HttpContext!.Request.Method == HttpMethods.Post ||
-						contextAccessor.HttpContext!.Request.Path == "/api/order" && contextAccessor.HttpContext!.Request.Method == HttpMethods.Get)
+					if (contextAccessor.HttpContext!.Request.Path == "/api/order/approve" && (contextAccessor.HttpContext!.Request.Method == HttpMethods.Post || contextAccessor.HttpContext!.Request.Method == HttpMethods.Options) ||
+					    contextAccessor.HttpContext!.Request.Path == "/api/order" && (contextAccessor.HttpContext!.Request.Method == HttpMethods.Get  || contextAccessor.HttpContext!.Request.Method == HttpMethods.Options))
 						return true;
 
 					return origin == "http://localhost:4200";
@@ -114,7 +113,7 @@ public static class Program {
 	private static void ConfigureEntityFramework(WebApplicationBuilder builder) {
 		builder.Services.AddDbContext<ApplicationDbContext>(
 			(serviceProvider, optionsBuilder) => optionsBuilder
-				.UseNpgsql(Program.TemporaryDatabaseContainer.ConnectionString)
+				.UseNpgsql("User ID=postgres;Password=postgrespwd123;Host=localhost;Port=5432;Database=Apotheke;Pooling=true;")
 		);
 	}
 
